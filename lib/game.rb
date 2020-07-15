@@ -1,13 +1,11 @@
 require_relative 'moves.rb'
 class Game
     include Moves
-    WHITE = {:pawn => "\u265f ", :knight => "\u265e ", :bishop => "\u265d ", :rook => "\u265c ", :queen => "\u265b ", :king => "\u265a "}
-    BLACK = {:pawn => "\u2659 ", :knight => "\u2658 ", :bishop => "\u2657 ", :rook => "\u2656 ", :queen => "\u2655 ", :king => "\u2654 "}
     attr_accessor :gameboard
     def initialize
         @gameboard = Board.new.board
         initial_pieces
-        board_display   
+        board_display
     end
 
     def board_display
