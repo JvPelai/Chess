@@ -6,6 +6,10 @@ module Moves
     def black_pawn_moves(start,destination)
         white_pieces = get_pieces("white")
         startpiece = @gameboard[start[0]][start[1]-1]
+        if startpiece.nil?
+            puts "invalid"
+            return
+        end
         endpiece= @gameboard[destination[0]][destination[1]-1]
         move = [destination[0]-start[0],start[1]-destination[1]]
         if (move == [1,0] || move == [2,0]) && (endpiece == "\u25fe" || endpiece == "\u25fd")
@@ -119,6 +123,138 @@ module Moves
             black_piece_move(start,destination,startpiece,endpiece,moves,move)
         end
     end
+
+    def white_rook_moves(start,destination)
+        startpiece = @gameboard[start[0]][start[1]-1]
+        endpiece= @gameboard[destination[0]][destination[1]-1]
+        moves = [[-1,0],[1,0],[0,-1],[0,1]]
+        move = [destination[0]-start[0],start[1]-destination[1]]
+        if move[0] != 0 && move[1] != 0
+            "invalid move"
+        else
+            if move[0] == 0
+                move[1] = move[1]/move[1].abs
+            else
+                move[0] = move[0]/move[0.abs]
+            end
+        end
+        if move == moves[0] #up
+            white_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move == moves[1] #down
+            white_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move == moves[2] #left
+            white_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move == moves[3] #right
+            white_piece_move(start,destination,startpiece,endpiece,moves,move)
+        end
+    end
+
+    def black_rook_moves(start,destination)
+        startpiece = @gameboard[start[0]][start[1]-1]
+        endpiece= @gameboard[destination[0]][destination[1]-1]
+        moves = [[-1,0],[1,0],[0,-1],[0,1]]
+        move = [destination[0]-start[0],start[1]-destination[1]]
+        if move[0] != 0 && move[1] != 0
+            "invalid move"
+        else
+            if move[0] == 0
+                move[1] = move[1]/move[1].abs
+            else
+                move[0] = move[0]/move[0.abs]
+            end
+        end
+        if move == moves[0] #up
+            black_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move == moves[1] #down
+            black_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move == moves[2] #left
+            black_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move == moves[3] #right
+            black_piece_move(start,destination,startpiece,endpiece,moves,move)
+        end
+    end
+
+    def white_queen_moves(start,destination)
+        startpiece = @gameboard[start[0]][start[1]-1]
+        endpiece= @gameboard[destination[0]][destination[1]-1]
+        moves = [[-1,0],[1,0],[0,-1],[0,1],[1,1],[1,-1],[-1,-1],[-1,1]]
+        move = [destination[0]-start[0],start[1]-destination[1]]
+        if move[0].abs == move[1].abs && move[0] != 0
+            move[0],move[1] = move[0]/move[0].abs, move[1]/move[1].abs
+        elsif move[0] == 0 && move[1] != 0
+            move[1] = move[1]/move[1].abs
+        elsif move[1] == 0 && move[0] != 0
+            move[0] = move[0]/move[0].abs
+        else
+            "invalid move"
+        end
+        if move == moves[0] #up
+            white_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move == moves[1] #down
+            white_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move == moves[2] #left
+            white_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move == moves[3] #right
+            white_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move[0] == move[1]  && move[0] < 0 #upleft
+            white_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move[0] < move[1] && move[0] < 0 #upright
+            white_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move[0] == move[1] && move[0] > 0 #downright
+            white_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move[0] > move[1] && move[0] > 0 #downleft
+            white_piece_move(start,destination,startpiece,endpiece,moves,move)
+        end
+    end
+
+    def black_queen_moves(start,destination)
+        startpiece = @gameboard[start[0]][start[1]-1]
+        endpiece= @gameboard[destination[0]][destination[1]-1]
+        moves = [[-1,0],[1,0],[0,-1],[0,1],[1,1],[1,-1],[-1,-1],[-1,1]]
+        move = [destination[0]-start[0],start[1]-destination[1]]
+        if move[0].abs == move[1].abs && move[0] != 0
+            move[0],move[1] = move[0]/move[0].abs, move[1]/move[1].abs
+        elsif move[0] == 0 && move[1] != 0
+            move[1] = move[1]/move[1].abs
+        elsif move[1] == 0 && move[0] != 0
+            move[0] = move[0]/move[0].abs
+        else
+            "invalid move"
+        end
+        if move == moves[0] #up
+            black_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move == moves[1] #down
+            black_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move == moves[2] #left
+            black_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move == moves[3] #right
+            black_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move[0] == move[1]  && move[0] < 0 #upleft
+            black_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move[0] < move[1] && move[0] < 0 #upright
+            black_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move[0] == move[1] && move[0] > 0 #downright
+            black_piece_move(start,destination,startpiece,endpiece,moves,move)
+        elsif move[0] > move[1] && move[0] > 0 #downleft
+            black_piece_move(start,destination,startpiece,endpiece,moves,move)
+        end
+    end
+
+    def white_king_moves(start,destination)
+        startpiece = @gameboard[start[0]][start[1]-1]
+        endpiece= @gameboard[destination[0]][destination[1]-1]
+        moves = [[-1,0],[1,0],[0,-1],[0,1],[1,1],[1,-1],[-1,-1],[-1,1]]
+        move = [destination[0]-start[0],start[1]-destination[1]]
+        white_piece_move(start,destination,startpiece,endpiece,moves,move)
+    end
+
+    def black_king_moves(start,destination)
+        startpiece = @gameboard[start[0]][start[1]-1]
+        endpiece= @gameboard[destination[0]][destination[1]-1]
+        moves = [[-1,0],[1,0],[0,-1],[0,1],[1,1],[1,-1],[-1,-1],[-1,1]]
+        move = [destination[0]-start[0],start[1]-destination[1]]
+        black_piece_move(start,destination,startpiece,endpiece,moves,move)
+    end
         
     def white_piece_move(start,destination,startpiece,endpiece,moves,move)
         black_pieces = get_pieces("black")
@@ -158,7 +294,7 @@ module Moves
                 @gameboard[start[0]][start[1]-1] = "\u25fe"
             end
         else
-            "Invalid move"
+            puts "Invalid move"
         end
     end
 
