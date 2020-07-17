@@ -1,7 +1,7 @@
 require_relative 'game.rb'
 Dir["pieces/*.rb"].each {|file| require_relative file}
 module Moves
-    attr_reader :WHITE, :BLACK
+    attr_accessor :WHITE, :BLACK
     WHITE = {:pawn => "\u265f ", :knight => "\u265e ", :bishop => "\u265d ", :rook => "\u265c ", :queen => "\u265b ", :king => "\u265a "}
     BLACK = {:pawn => "\u2659 ", :knight => "\u2658 ", :bishop => "\u2657 ", :rook => "\u2656 ", :queen => "\u2655 ", :king => "\u2654 "}
     def white_piece_move(start,destination,startpiece,endpiece,moves,move)
@@ -21,7 +21,7 @@ module Moves
                 @gameboard[start[0]][start[1]-1] = "\u25fe"
             end
         else
-            "Invalid move"
+            puts "Invalid move!", "\n"
         end
     end
     
@@ -62,8 +62,3 @@ module Moves
         end
     end
 end
-
-#elsif start == BLACK[:pawn]
-    #moves = [[1,0],[2,0],[1,-1],[1,1]]
-#end
-

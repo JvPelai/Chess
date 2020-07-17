@@ -6,6 +6,8 @@ class Game
         @gameboard = Board.new.board
         initial_pieces
         board_display
+        white_bishop_moves([8,3],[6,5])
+        board_display
     end
 
     def board_display
