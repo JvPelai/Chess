@@ -15,16 +15,16 @@ module Moves
         end
         move[0],move[1] = move[0]/move[0].abs, move[1]/move[1].abs
         if move[0] == move[1]  && move[0] < 0 #upleft
-            return if !upleft_valid?(start,destination,"white")
+            return if !upleft_valid?(start,destination)
             white_piece_move(start,destination,startpiece,endpiece,moves,move)
         elsif move[0] < move[1] && move[0] < 0 #upright
-            return if !upright_valid?(start,destination,"white")
+            return if !upright_valid?(start,destination)
             white_piece_move(start,destination,startpiece,endpiece,moves,move)
         elsif move[0] == move[1] && move[0] > 0 #downright
-            return if !downright_valid?(start,destination,"white")
+            return if !downright_valid?(start,destination)
             white_piece_move(start,destination,startpiece,endpiece,moves,move)
         elsif move[0] > move[1] && move[0] > 0 #downleft
-            return if !downleft_valid?(start,destination,"white")
+            return if !downleft_valid?(start,destination)
             white_piece_move(start,destination,startpiece,endpiece,moves,move)
         end
     end
@@ -45,26 +45,25 @@ module Moves
         end
         move[0],move[1] = move[0]/move[0].abs, move[1]/move[1].abs
         if move[0] == move[1] && move[0] > 0 #downright
-            return if !downright_valid?(start,destination,"black")
+            return if !downright_valid?(start,destination)
             black_piece_move(start,destination,startpiece,endpiece,moves,move)
         elsif move[0] > move[1] && move[0] > 0 #downleft
-            return if !downleft_valid?(start,destination,"black")
+            return if !downleft_valid?(start,destination)
             black_piece_move(start,destination,startpiece,endpiece,moves,move)
         elsif move[0] == move[1]  && move[0] < 0 #upleft
-            return if !upleft_valid?(start,destination,"black")
+            return if !upleft_valid?(start,destination)
             black_piece_move(start,destination,startpiece,endpiece,moves,move)
         elsif move[0] < move[1] && move[0] < 0 #upright
-            return if !upright_valid?(start,destination,"black")
+            return if !upright_valid?(start,destination)
             black_piece_move(start,destination,startpiece,endpiece,moves,move)
         end
     end
 
-    def upright_valid?(start,destination,color)
-        pieces = get_pieces(color)
+    def upright_valid?(start,destination)
         i = 1
         while i < destination[1] - start[1]
             tracked = @gameboard[start[0]-i][start[1]-1+i]
-            if pieces.include?(tracked)
+            if tracked != "\u25fe" && tracked != "\u25fd"
                 puts "Invalid move"
                 return false
             else
@@ -73,46 +72,46 @@ module Moves
         end
     end
 
-    def upleft_valid?(start,destination,color)
-        pieces = get_pieces(color)
+    def upleft_valid?(start,destination)
         i = 1
         while i < start[0] - destination[0]
             tracked = @gameboard[start[0]-i][start[1]-1-i]
-            if pieces.include?(tracked)
+            if tracked != "\u25fe" && tracked != "\u25fd"
                 puts "Invalid move"
                 return false
             else
                 i += 1
             end
         end
+        true
     end
 
-    def downright_valid?(start,destination,color)
-        pieces = get_pieces(color)
+    def downright_valid?(start,destination)
         i = 1
         while i < destination[0] - start[0]
             tracked = @gameboard[start[0]+i][start[1]-1+i]
-            if pieces.include?(tracked)
+            if tracked != "\u25fe" && tracked != "\u25fd"
                 puts "Invalid move"
                 return false
             else
                 i += 1
             end
         end
+        true
     end
 
-    def downleft_valid?(start,destination,color)
-        pieces = get_pieces(color)
+    def downleft_valid?(start,destination)
         i = 1
         while i < destination[0] - start[0]
             tracked = @gameboard[start[0]+i][start[1]-1-i]
-            if pieces.include?(tracked)
+            if tracked != "\u25fe" && tracked != "\u25fd"
                 puts "Invalid move"
                 return false
             else
                 i += 1
             end
         end
+        true
     end
         
 

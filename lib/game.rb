@@ -6,17 +6,6 @@ class Game
         @gameboard = Board.new.board
         initial_pieces
         board_display
-        white_bishop_moves([8,3],[6,5])
-        board_display
-        sleep(1)
-        white_bishop_moves([8,6],[6,4])
-        board_display
-        sleep(1)
-        black_bishop_moves([1,2],[3,4])
-        board_display
-        sleep(1)
-        black_bishop_moves([1,6],[3,4])
-        board_display
     end
 
     def board_display
