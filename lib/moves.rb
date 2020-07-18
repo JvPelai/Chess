@@ -13,6 +13,7 @@ module Moves
             else
                 @gameboard[start[0]][start[1]-1] = "\u25fe"
             end
+            @valid = true
         elsif moves.include?(move) && black_pieces.include?(endpiece)
             @gameboard[destination[0]][destination[1]-1] = startpiece
             if (start[0].even? && (start[1]-1).even?) || (start[0].odd? && (start[1]-1).odd?)
@@ -20,6 +21,7 @@ module Moves
             else
                 @gameboard[start[0]][start[1]-1] = "\u25fe"
             end
+            @valid = true
         else
             puts "Invalid move!", "\n"
         end
@@ -34,6 +36,7 @@ module Moves
             else
                 @gameboard[start[0]][start[1]-1] = "\u25fe"
             end
+            @valid = true
         elsif moves.include?(move) && white_pieces.include?(endpiece)
             @gameboard[destination[0]][destination[1]-1] = startpiece
             if (start[0].even? && (start[1]-1).even?) || (start[0].odd? && (start[1]-1).odd?)
@@ -41,6 +44,7 @@ module Moves
             else
                 @gameboard[start[0]][start[1]-1] = "\u25fe"
             end
+            @valid = true
         else
             puts "Invalid move"
         end
